@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="../public/js/vue.js"></script>
+    <title>vue.js</title>
+</head>
+<body>
+    <h4>v-if v-else v-show</h4>
+    <hr>
+    <div class="app">
+     <p v-if='isHost'>这是主人权限</p>
+     <p v-else=>这是客人权限</p> 
+    </div>
+    
+    <div class='app'>
+        <p v-show>这是v-show展示的权限</p>
+    </div>
+    
+
+</body>
+<script>
+    const data={
+        el:'.app',
+        data:{
+            isHost:true
+        }
+    };
+     new Vue(data);
+</script>
+</html>

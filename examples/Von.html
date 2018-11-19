@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="../public/js/vue.js"></script>
+
+    <title>V-on</title>
+</head>
+<body>
+    <h4>v-on绑定事件监听器</h4>
+    <div  id="onv">
+    <p>我是黑幕，我决定这次的hjw的得分是{{result}}</p>
+    <button v-on:click='add'>加分数</button>
+    <button v-on:click='des'>减分数</button>
+    <hr>
+    <h4>@绑定事件</h4>
+    <button @click='add'>加分数</button>
+    <button @click='des'>减分数</button>
+    <h4>绑定键盘事件,v-on:keyup是固定的，keyup.XX有固定的不同键盘事件</h4>
+    <input type="text" v-on:keyup.enter="submit"/>
+    </div>
+</body>
+<script>
+    const data={
+            el:'#onv',
+            data:{
+               result:1
+            },
+            methods:{
+                add:function(){
+                    this.result++;
+                },
+                des:function(){
+                    this.result--;
+                },
+                submit:function(){
+                    this.result='你被骗了';
+                }
+            }
+    }
+    new Vue(data);
+  //定义函数时，不能使用箭头函数()=>{}
+
+
+</script>
+</html>

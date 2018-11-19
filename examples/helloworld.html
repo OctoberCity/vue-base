@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="../public/js/vue.js"></script>
+    <title>vue.js</title>
+</head>
+<body>
+    <h2>hello world</h2>
+    <span>#app下的值</span>
+    <p id="app">
+        {{messageforId}}
+      <!---  <hr>
+        {{messageforClass}}
+      -->
+    </p>
+    <!--
+    <hr>
+    <span>.app下的值</span>
+    <p class="app">
+            {{messageforId}}
+            <hr>
+            <span>{{messageforClass}}</span>
+    </p>
+     -->
+
+</body>
+<script>
+    const data={
+        el:'.app , #app',
+        data:{
+            messageforId:'see you again',
+            messageforClass:'nice to meet you'
+        }
+    };
+    const vue =new Vue(data);
+</script>
+</html>

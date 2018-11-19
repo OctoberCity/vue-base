@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="../public/js/vue.js"></script>
+    <title>vue.js</title>
+</head>
+<body>
+    <h4>v-model双向数据绑定</h4>
+    <span>你可以用 v-model 指令在表单 '<'input'>'、'<'textarea'>' 及 '<'select'>' 元素上创建双向数据绑定</span>
+    <div id="app">
+        <h4>文本框</h4>
+        <input type="text" v-model="message"/>
+        <p>文本框的值是：{{message}}</p>
+        <h4>多行文本框</h4>
+        <textarea type="text" v-model="moreLineMes"></textarea>
+        <p>文本框的值是：{{moreLineMes}}</p>
+        <h4>复选框</h4>
+        <input type="checkbox" value='看书' v-model="checkboxValue"/>
+        <label>我喜欢看书</label> 
+        <input type="checkbox" value='动漫' v-model="checkboxValue"/>
+        <label>我喜欢动漫</label> 
+        <input type="checkbox" value='发呆' v-model="checkboxValue"/>
+        <label>我喜欢发呆</label> 
+        <p>复选框的值是：{{checkboxValue}}</p>
+        <h4>下拉框(多选绑定数组)</h4>
+        <select v-model="select">
+            <option disabled value="">选择</option>
+            <option  value="more">多</option>
+            <option  value="like">喜欢</option>
+            <option   value="freedom">飞</option>
+        </select>
+        <p >下拉框的值是{{select}}</p>
+        <h4>下拉框v-for,v-bind绑定渲染</h4>
+        <select v-model="vforSelect">
+            <option v-for='option in options' v-bind:value="option.value">
+                {{option.text}}
+            </option>
+        </select>
+        <p>v-for,vbind渲染的值是{{}}</p>
+        
+    </div>
+    
+</body>
+<script>
+        const data={
+            el:'#app',
+            data:{ 
+                message:'文本框默认值' ,
+                moreLineMes:'多行文本默认值' ,
+                checkboxValue:[],
+                select:'',
+            } 
+        };
+ 
+        new Vue(data);
+    </script>
+</html>

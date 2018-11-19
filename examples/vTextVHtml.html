@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-text  v-html</title>
+    <script type="text/javascript" src="../public/js/vue.js"></script>
+
+</head>
+<body>
+    <div id="test">
+    <h4>v-text v-html</h4>
+    <p>使用{{}}，在数据加载较慢的时候会把字段名字显现出来，可使用v-text替代</p>
+    <p>{{text}}是这个<span v-text="isVtext"></span></p>
+    <p>{{html}}是这个<div v-html='isVHtml'></div></p>
+    </div>
+</body>
+<script>
+    const data={
+        el:"#test",
+        data:{
+            isVtext:"Text的文本内容",
+            isVHtml:'HTmldom节点内容'
+        }
+    };
+    new Vue(data);
+</script>
+</html>
