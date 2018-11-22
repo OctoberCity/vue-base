@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="../public/js/vue.js"></script>
+
+    <title>vue全局API</title>
+</head>
+<body>
+    <h4>Vue.extend一般是和组件连用,但是暂时例子使用自定义无参数标签</h4>
+    <hjw></hjw>
+    <p id="test">原本的内容</p>
+</body>
+<script>
+    var extend =Vue.extend({
+        template:'<p>{{content}}</p>',
+        data:function(){
+           return {
+            content:'这是自定义产生的内容'
+           }
+        }
+    });
+    //挂载到<hjw>标签上面
+    new extend().$mount("hjw");
+    // 挂载到。class或者#id
+    new extend().$mount("#test");
+</script>
+</html>

@@ -26,20 +26,20 @@
         <label>我喜欢发呆</label> 
         <p>复选框的值是：{{checkboxValue}}</p>
         <h4>下拉框(多选绑定数组)</h4>
-        <select v-model="select">
-            <option disabled value="">选择</option>
+        <select v-model="selectArr" multiple >
+            <option disabled value="1">选择</option>
             <option  value="more">多</option>
             <option  value="like">喜欢</option>
             <option   value="freedom">飞</option>
         </select>
-        <p >下拉框的值是{{select}}</p>
-        <h4>下拉框v-for,v-bind绑定渲染</h4>
+        <p >下拉框的值是{{selectArr}}</p>
+        <h4>v-bind绑定渲染,v-bind是作用html标签的属性例如绑定下拉option的value</h4>
         <select v-model="vforSelect">
             <option v-for='option in options' v-bind:value="option.value">
                 {{option.text}}
             </option>
         </select>
-        <p>v-for,vbind渲染的值是{{}}</p>
+        <p>v-for,vbind渲染的值是{{vforSelect}}</p>
         
     </div>
     
@@ -52,6 +52,9 @@
                 moreLineMes:'多行文本默认值' ,
                 checkboxValue:[],
                 select:'',
+                selectArr:[],//下拉多选
+                vforSelect:'1',
+                options:[{text:'hjw1',value:"1"},{text:'hjw2',value:"2"},{text:'hjw3',value:"3"},{text:'hjw4',value:"4"}], 
             } 
         };
  
