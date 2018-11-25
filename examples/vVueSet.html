@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="../public/js/vue.js"></script>
+    <title>v-set</title>
+</head>
+<body>
+    <p>vue-set作用是在构造器外部操作构造器内部数据，属性，方法，在某些情况改变下页面不会更具数据改变而改变，
+        例如，利用数组下表去改变数组的数据，或者数组的长度。
+    </p>
+    <hr>
+    <div id="app">
+    <p >我叫{{name}}，年龄是{{age}}</p>
+    <button @click='vuesetAdd'>vue-set</button>
+    <button @click='vueObjAdd'>vue实例操作</button>
+    <button @click='dataObjAdd'>外部数据操作</button>
+    </div>
+    
+</body>
+ <script>
+   const data={
+       name:'hjw',
+       age:17
+   }
+   const app =new  Vue({
+       el:"#app",
+       data:data,
+       methods:{
+           vuesetAdd:function(){
+               Vue.set(data,'age',10); // vue.set
+           },
+           vueObjAdd:function(){
+               app.age = 13;  //vue实例对象修改
+           },
+           dataObjAdd:function(){
+               data.age="111111";  //直接操作外部数据
+           }
+       }
+   }); 
+  
+
+ </script>
+</html>

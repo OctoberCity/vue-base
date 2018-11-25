@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="../public/js/vue.js"></script>
+    <title>初识component组件</title>
+</head>
+<body>
+    <div id="app">
+    <h4>全局注册组件</h4>
+    <p>
+    这是：<allscope></allscope>
+    </p> 
+    <hr>
+    <h4>局部注册组件</h4>
+    <p>
+    这是：<partscope></partscope>
+   </p>
+   <hr>
+    </div>
+    <div id="scope">
+        <p>
+        这是测试全局注册：<allscope></allscope>
+        </p>
+        <p>
+        这是测试局部注册：<partscope></partscope>
+        </p>
+    </div>
+</body>
+<script>
+    //全局注册
+    Vue.component("allscope",{
+        template:`<span>这是全局注册的</span>`
+    });
+
+    //局部注册
+    new Vue({
+        el:"#app",
+        data:{},
+        components:{
+           "partscope":{
+               template:`<span>这是局部注册的</span>`
+               }
+        }
+    });
+   //测试作用域
+   new Vue({
+       el:"#scope"
+   });
+
+</script>
+</html>

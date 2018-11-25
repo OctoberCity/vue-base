@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="../public/js/vue.js"></script>
+    <title>vue全局API</title>
+</head>
+<body>
+    <div id="app">
+    <h4>父子组件关系如何在组件中包含其他组件</h4>
+    <parent></parent>
+     </div>
+</body>
+  <script>
+  const children={
+      template:`<span color="red">这是子组件</span>`,
+  };    
+  const parent={
+      template:`<p>这是父组件<children></children></p>`,
+      components:{
+          "children":children
+      } 
+  }
+  
+  new  Vue({
+      el:"#app",
+      data:{
+
+      },
+      components:{
+         "parent":parent
+      }
+  });
+  
+  </script>
+</html>

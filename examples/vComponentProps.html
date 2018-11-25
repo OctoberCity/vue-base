@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="../public/js/vue.js"></script>
+    <title>vue-component-props</title>
+</head>
+<body>
+    <h4>
+     设置组件属性
+    </h4>
+    <hr>
+    <div id="app">
+        <myself color="green"></myself>
+    <hr>
+    <h4>关于自定义标签使用“-”设置名字的，在构造器中用驼峰命名代替</h4>
+    <myself first-name="hjw"></myself>
+    <hr>
+    <h4>将自定义属性的值绑定到构造器的数据</h4>
+    <myself v-bind:color="message"></myself>
+    </div>
+</body>
+<script>
+  new Vue({
+      el:"#app",
+      data:{
+          message:"red"
+      },
+      components:{
+          "myself":{
+              template:`<span>这是模板属性的值{{color}}我的名字{{firstName}}</span>`,
+              props:['color',"firstName"],
+          }
+      }
+  });
+
+</script>
+</html>

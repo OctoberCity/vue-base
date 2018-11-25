@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-template</title>
+</head>
+<body>
+    <p>模板暂时有三种写法：构造器中，template标签中，script标签中，还有在vue-cli中的xxx-vue写法</p>
+    <h4>在vue构造器中，注意哦，有‘``’符号</h4>
+    <div id ="vueNew">
+         
+    </div>
+</body>
+<script>
+new Vue({
+    el:"#app",
+    data:{
+        name:hjw1
+    },
+    template:`
+    <p>这是写在构造器中的模板</p>
+    `
+});
+</script>
+<script>
+<template id="template2">
+   <p>这是写在template标签中的模板</p>
+</template>
+new Vue({
+    el:"#app",
+    data:{},
+    template:"#template2"
+});
+</script>
+<script type="x-template" id="template3">
+    <p>这是script中引入的标签</P>
+</script>
+<script>
+new Vue({
+    el:"#app",
+    data:{},
+    template:"#template3"
+});
+</script>
+</html>

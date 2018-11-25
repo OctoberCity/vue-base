@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="../public/js/vue.js"></script>
+    <title>vue全局API</title>
+</head>
+<body>
+    <h4>vue自定义的标签，主要用途，动态绑定组件，更具数据不同更换不同组件</h4>
+   <div id="app">
+      <component v-bind:is="isWhoComponent"></component> 
+      <button @click="changeComonents">变化组件</button>
+   </div> 
+</body>
+<script>
+    const component1={
+        template:`<span color="red">我是组件1</span>`
+    }
+    const component2={
+        template:`<span color="blue">我是组件2</span>`
+    }
+    const component3={
+        template:`<span color="green">我是组件3</span>`
+    }
+    new Vue({
+        el:"#app",
+        data:{
+            isWhoComponent:"component1"  
+        },
+        components:{
+            "component1":component1,
+            "component2":component2,
+            "component3":component3,
+        },
+        methods:{
+           changeComonents:function(){
+               if(this.isWhoComponent === 'component1'){
+                this.isWhoComponent = 'component2'
+               }else if(this.isWhoComponent === 'component2'){
+                this.isWhoComponent = 'component3'
+               }else{
+                this.isWhoComponent = 'component1'
+               }
+           }
+        }
+    });
+</script>
+</html>
