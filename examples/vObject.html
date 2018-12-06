@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="../public/js/vue.js"></script>
+    <script type="text/javascript" src="../public/js/jquery.js"></script>
+
+    <title>vue实例</title>
+</head>
+<body>
+    <h4>vue.js实例</h4>
+    <div id="app">{{message}}</div>
+</body>
+<script>
+   const app= new Vue({
+        el:"#app",
+        data:{
+            message:"我的终究是我的"
+        },
+        methods:{
+            add:function(){
+                console.log("这是调用了我的加法啊哥");
+            }
+        },
+        mounted:function(){
+            $("#app").html("挂载之后我修改了你,不是我的终究不是我的");
+        }
+    });
+    app.add();
+</script>
+</html>

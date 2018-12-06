@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="../public/js/vue.js"></script>
+    <script type="text/javascript" src="../public/js/jquery.js"></script>
+
+    <title>vue实例</title>
+</head>
+<body>
+    <h4>vue.js实例</h4>
+    <div id="app">{{message}}</div>
+    <button onclick="destrory()">卸载挂载的东西</button>
+</body>
+<script>
+   const app= new Vue({
+        el:"#app",
+        data:{
+            message:"我的终究是我的"
+        } 
+    });
+    //扩展
+    const hjw = Vue.extend({
+        template:`<p>{{miss}}</p>`,
+        data:function(){
+            return  {miss:"see you again ,may"}
+        },
+    });
+    //将扩展挂载至目标
+    const vm=new hjw().$mount("#app");
+    function destrory(){
+        console.log("000000");
+       vm.$destroy();
+    }
+</script>
+</html>
