@@ -5,19 +5,21 @@
         <el-tabs>
           <el-tab-pane label="点餐">
             <el-table :data="orderData" style="width:100%">
-              <el-table-column prop="foodname" label="商品名字" width=""></el-table-column>
-              <el-table-column prop="number" label="数量" width=""></el-table-column>
-              <el-table-column prop="amount" label="金额" width=""></el-table-column>
+              <el-table-column prop="goodsName" label="商品名字" width=""></el-table-column>
+              <el-table-column prop="count" label="数量" width=""></el-table-column>
+              <el-table-column prop="mcount" label="金额" width=""></el-table-column>
               <el-table-column prop="do" label="操作" width="" fixed="right">
                 <template slot-scope="scope">
                   <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
                   <el-button type="text" size="small">编辑</el-button>
+                  <el-button type="text" size="small" @click="deleteGoodsFromOrder(scope.row)">删除</el-button>
+                  <el-button  @click="addGoodsToOrder(scope.row)"  type="text" size="small">添加</el-button>
                 </template>
               </el-table-column>
             </el-table>
             <el-button type="warning">挂单</el-button>
             <el-button type="danger">删除</el-button>
-            <el-button type="success">结账</el-button>
+            <el-button type="success" @click="getAllMcount()">结账</el-button>
           </el-tab-pane>
           <el-tab-pane label="挂单"></el-tab-pane>
           <el-tab-pane label="外卖"></el-tab-pane>
@@ -29,29 +31,37 @@
           <div class="title">热门食物</div>
           <div class="HotFood">
             <ul>
-              <li v-for="(item,index) in HotFoodList" :key="index">
-                <span>{{item.foodName}}</span>
+              <li v-for="(item,index) in HotFoodList" :key="index" @click="addOrderList(item)">
+                <span>{{item.goodsName}}</span>
                 <span class="price">￥{{item.price}}元</span>
               </li>
             </ul>
           </div>
         </div>
-        <!-- <div class="typeOfFood">
+        <div class="typeOfFood">
           <el-tabs>
             <el-tab-pane label="汉堡" name="hambager">
               <ul class="typeOfFoodList">
-                <li v-for="(item,indexs) in typeOfFoodList " :key="item.foodId">
-                  <img :src="item.imgSrc" width="100%">
-                  <span class="foodName" >{{item.foodName}}</span>
+                <li v-for="(item,index) in typeOfFoodList " :key="item.goodsId">
+                  <img :src="item.goodsImg" width="100%">
+                  <span class="foodName" >{{item.goodsName}}</span>
                   <span class="price">￥{{item.price}}</span>
                 </li>
               </ul>
             </el-tab-pane>
-            <el-tab-pane label="小食品" name="littleFood">小食品</el-tab-pane>
+            <el-tab-pane label="小食品" name="littleFood">
+                <ul class="typeOfFoodList">
+                    <li v-for="(item,index) in typeOfFoodList2 " :key="item.goodsId">
+                      <img :src="item.goodsImg" width="100%">
+                      <span class="foodName" >{{item.goodsName}}</span>
+                      <span class="price">￥{{item.price}}</span>
+                    </li>
+                  </ul>
+            </el-tab-pane>
             <el-tab-pane label="饮料" name="drank">饮料</el-tab-pane>
             <el-tab-pane label="套餐" name="foodPackage"></el-tab-pane>
           </el-tabs>
-        </div> -->
+        </div>
       </el-col>
     </el-row>
 
@@ -63,55 +73,51 @@ export default {
   name: 'Pos',
   data () {
     return {
-      orderData: [{
-        foodname: '面包',
-        number: 2,
-        amount: 45
-      },
-      {
-        foodname: '面包',
-        number: 2,
-        amount: 45
-      },
-      {
-        foodname: '面包',
-        number: 2,
-        amount: 45
-      }
+      orderData: [
       ],
-      HotFoodList: [{
-        foodName: '芝士炒饭',
-        price: 16
-      },
-      {
-        foodName: '芝士炒饭2',
-        price: 16
-      },
-      {
-        foodName: '芝士炒饭2',
-        price: 16
-      }
+      HotFoodList: [
+      ],
+      typeOfFoodList: [
+      ],
+      typeOfFoodList2: [
       ]
-    //   typeOfFoodList: [{
-    //     imgSrc: 'https://img.4008823823.com.cn/kfcios/Version/537_427267.jpg',
-    //     foodName: '人肉叉烧汉堡',
-    //     price: 16,
-    //     foodId: 1
-    //   },
-    //   {
-    //     imgSrc: 'https://img.4008823823.com.cn/kfcios/Version/537_427267.jpg',
-    //     foodName: '人肉叉烧汉堡',
-    //     price: 16,
-    //     foodId: 2
-    //   },
-    //   {
-    //     imgSrc: 'https://img.4008823823.com.cn/kfcios/Version/537_427267.jpg',
-    //     foodName: '人肉叉烧汉堡',
-    //     price: 16,
-    //     foodId: 3
-    //   }
-    //   ]
 
+    }
+  },
+  methods: {
+    addOrderList (item) {
+      let isbe = false
+      let arr = this.orderData.filter((object) => object.goodsId === item.goodsId)
+      if (arr.length !== 0) {
+        this.orderData = this.orderData.map((value) => {
+          if (value.goodsId === arr[0].goodsId) {
+            value.count++
+            value.mcount = value.count * value.price
+          }
+          return value
+        })
+      } else {
+        this.orderData.push({
+          goodsId: item.goodsId, goodsName: item.goodsName, price: item.price, count: 1, mcount: item.price
+        })
+      }
+    },
+    addGoodsToOrder: function (item) {
+      this.orderData = this.orderData.map((value) => {
+        if (value.goodsId === item.goodsId) {
+          value.count++
+          value.mcount = value.count * value.price
+        }
+        return value
+      })
+    },
+    deleteGoodsFromOrder: function (item) {
+      this.orderData = this.orderData.filter(obj => obj.goodsId !== item.goodsId)
+    },
+    getAllMcount: function () {
+      let allnum = 0
+      this.orderData.forEach((item) => { allnum = allnum + item.mcount })
+      alert(allnum)
     }
   },
   mounted: function () {
@@ -119,9 +125,22 @@ export default {
     document.getElementById('orderList').style.height = orderHe + 'px'
   },
   created: function () {
+    // 热门食物
     axios.get('https://www.easy-mock.com/mock/5b8b30dbf032f03c5e71de7f/kuaican/oftenGoods')
       .then(res => {
         console.log(res)
+        this.HotFoodList = res.data
+      })
+      .catch(error => {
+        console.log(error)
+      })
+
+    // 食物菜单
+    axios.get('https://www.easy-mock.com/mock/5b8b30dbf032f03c5e71de7f/kuaican/typeGoods')
+      .then(res => {
+        console.log(res)
+        this.typeOfFoodList = res.data[0]
+        this.typeOfFoodList2 = res.data[1]
       })
       .catch(error => {
         console.log(error)
